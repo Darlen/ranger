@@ -418,6 +418,7 @@ public class LdapUserGroupBuilder extends AbstractUserGroupSource {
 								}
 								continue;
 							}
+//							System.out.println("entry="+userEntry);
 
 							Attributes attributes = userEntry.getAttributes();
 							if (attributes == null)  {
@@ -428,6 +429,7 @@ public class LdapUserGroupBuilder extends AbstractUserGroupSource {
 								continue;
 							}
 
+							//前段配置的Username Attribute
 							Attribute userNameAttr  = attributes.get(userNameAttribute);
 							if (userNameAttr == null)  {
 								if (LOG.isInfoEnabled())  {
@@ -447,6 +449,7 @@ public class LdapUserGroupBuilder extends AbstractUserGroupSource {
 								continue;
 							}
 
+							/**如果设置的group开关不是先查，那么添加用户，再更新用户的组信息*/
 							if (!groupSearchFirstEnabled) {
 								userInfo = new UserInfo(userName, userEntry.getNameInNamespace());
 								Set<String> groups = new HashSet<String>();

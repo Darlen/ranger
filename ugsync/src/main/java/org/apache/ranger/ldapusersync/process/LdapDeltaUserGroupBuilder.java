@@ -425,7 +425,7 @@ public class LdapDeltaUserGroupBuilder extends AbstractUserGroupSource {
 							}
 							continue;
 						}
-
+						//前端配置的Username Attribute
 						Attribute userNameAttr  = attributes.get(userNameAttribute);
 						if (userNameAttr == null)  {
 							if (LOG.isInfoEnabled())  {
@@ -468,6 +468,7 @@ public class LdapDeltaUserGroupBuilder extends AbstractUserGroupSource {
 							}
 						}
 
+						//如果设置group开关不是先查询，那么先添加用户，再更新用户的组信息
 						if (!groupSearchFirstEnabled) {
 							String transformUserName = userNameTransform(userName);
 							try {
@@ -506,6 +507,7 @@ public class LdapDeltaUserGroupBuilder extends AbstractUserGroupSource {
 							}
                             counter++;
 						} else {
+							/**如果是group先查，那么判断group里面是否包含用户，如果包含，则添加该用户*/
 							// If the user from the search result is present in the group user table,
 							// then addorupdate user to ranger admin.
 							LOG.debug("Chekcing if the user " + userFullName + " is part of the retrieved groups");

@@ -645,6 +645,7 @@ private static final Logger LOG = Logger.getLogger(LdapPolicyMgrUserGroupBuilder
 					@Override
 					public MUserInfo run() {
 						try {
+							//发送http，执行添加用户
 							return getMUser(userInfoFinal, result);
 						} catch (Exception e) {
 							LOG.error("Failed to add User : ", e);
